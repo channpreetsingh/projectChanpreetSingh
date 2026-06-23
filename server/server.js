@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const { connectToDatabase } = require("./db");
 
 const app = express();
 
@@ -12,6 +13,26 @@ app.get("/", (req, res) => {
   res.json({
     message: "Backend API is running",
   });
+});
+
+app.get("/api/db-test", async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+
+    const collections = await db.listCollections().toArray();
+
+    res.status(200).json({
+      message: "MongoDB connection successful",
+      database: "sample_mflix",
+      collections: collections.map((collection) => collection.name),
+    });
+  } catch (error) {
+    console.error("Database test error:", error);
+
+    res.status(500).json({
+      error: "Failed to connect to MongoDB",
+    });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
