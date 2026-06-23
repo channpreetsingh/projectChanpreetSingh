@@ -3,11 +3,13 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { connectToDatabase } = require("./db");
+const sampleMoviesRoutes = require("./routes/sampleMovies");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/sample-movies", sampleMoviesRoutes);
 
 app.get("/", (req, res) => {
   res.json({
