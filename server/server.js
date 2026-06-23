@@ -10,6 +10,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// hey this is chann
 app.use("/api/sample-movies", sampleMoviesRoutes);
 app.use("/api/practice-movies", practiceMoviesRoutes);
 
@@ -20,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/db-test", async (req, res) => {
+
+
   try {
     const db = await connectToDatabase();
 
