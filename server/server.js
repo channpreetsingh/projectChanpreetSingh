@@ -4,12 +4,14 @@ const express = require("express");
 const cors = require("cors");
 const { connectToDatabase } = require("./db");
 const sampleMoviesRoutes = require("./routes/sampleMovies");
+const practiceMoviesRoutes = require("./routes/practiceMovies");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/sample-movies", sampleMoviesRoutes);
+app.use("/api/practice-movies", practiceMoviesRoutes);
 
 app.get("/", (req, res) => {
   res.json({
